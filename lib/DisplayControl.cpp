@@ -2,6 +2,8 @@
 
 #include "DisplayControl.hpp"
 
+
+
 void DisplayControl::Clear(StringType ID){
 	switch(ID){
 		case RELOAD:{
@@ -35,6 +37,8 @@ void DisplayControl::DisplayString(const char* s, StringType ID){
 		}
 	}
 }
+
+
 
 void DisplayControl::DisplayString(int s, StringType ID){
 	switch(ID){

@@ -27,12 +27,26 @@ public:
 		healthOstream(healthOstream),
 		health(_health){
 			display.clear();
-		//if(health != -1)
-		// TODO initialize HealthBar
 		}
 
+
+
+	///@fn void DisplayControl::clear(const char* s, StringType ID)
+	///@brief Clears a screen by id
+	///@param ID The screen which should be overriden
 	void Clear(StringType ID);
+
+
+	///@fn void DisplayControl::DisplayString(const char* s, StringType ID)
+	///@brief Sets a char string on screen
+	///@param s The string to put on screen.
+	///@param ID The screen which should be overriden
 	void DisplayString(const char* s, StringType ID);
+
+	///@fn void DisplayControl::DisplayString(int s, StringType ID)
+	///@brief Sets an int on screen
+	///@param s The int to put on screen.
+	///@param ID The screen which should be overriden
 	void DisplayString(int s, StringType ID);
 };
 
