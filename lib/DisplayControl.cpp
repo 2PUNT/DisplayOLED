@@ -2,6 +2,26 @@
 
 #include "DisplayControl.hpp"
 
+void DisplayControl::ClearNoFlush(StringType ID){
+	switch(ID){
+		case RELOAD:{
+			reloadDisplay.clear();
+			reloadOstream.goto_xy(0,0);
+			break;
+		}
+		case HEALTH:{
+			healthDisplay.clear();
+			healthOstream.goto_xy(0,0);
+			break;
+		}
+		case ENTIRE_SCREEN:{
+			display.clear();
+			entireScreenOstream.goto_xy(0,0);
+			break;
+		}
+	}
+}
+
 void DisplayControl::Clear(StringType ID){
 	switch(ID){
 		case RELOAD:{
@@ -20,11 +40,11 @@ void DisplayControl::Clear(StringType ID){
 }
 
 void DisplayControl::DisplayString(const char* s, StringType ID){
+	hwlib::cout << "clearing ostream\n";
+	ClearNoFlush(ID); // clear the Ostream, but do not flush yet.
+	hwlib::cout << "ostream cleared\n";
 	switch(ID){
 		case RELOAD:{
-			hwlib::cout << "clearing ostream\n";
-			reloadOstream << "\f"; // clear the Ostream, but do not flush yet.
-			hwlib::cout << "ostream cleared\n";
 			int index = 0;
 			char currentChar = s[index];
 			hwlib::cout << "writing characters\n";
@@ -40,7 +60,7 @@ void DisplayControl::DisplayString(const char* s, StringType ID){
 			break;
 		}
 		case HEALTH:{
-			healthOstream << "\f"; // clear the Ostream, but do not flush yet.
+			//healthOstream << "\f"; // clear the Ostream, but do not flush yet.
 			
 			int index = 0;
 			char currentChar = s[index];
@@ -53,7 +73,7 @@ void DisplayControl::DisplayString(const char* s, StringType ID){
 			break;
 		}
 		case ENTIRE_SCREEN:{
-			entireScreenOstream << '\f'; // clear the Ostream, but do not flush yet.
+			//entireScreenOstream << '\f'; // clear the Ostream, but do not flush yet.
 			
 			int index = 0;
 			char currentChar = s[index];
@@ -106,22 +126,24 @@ private:
 	hwlib::window_ostream entireScreenOstream; // Ostream to write characters to the Entire screen
 
 	int health; // variable to store the current health displayed.
+	
+	void ClearNoFlush();
 public:
 	DisplayControl(hwlib::window& _display, int _health = -1):
 		display(_display),
-		reloadDisplay(display, hwlib::location(0,0), hwlib::location(display.size.x/2, display.size.y/2)),
-		healthDisplay(display, hwlib::location(display.size.x/2 + 1, display.size.y/2 + 1), hwlib::location(display.size.x - 1, display.size.y - 1)),
-		reloadOstream(reloadDisplay, hwlib::font_default_8x8),
-		healthOstream(healthDisplay, hwlib::font_default_8x8),
-		entireScreenOstream(display, hwlib::font_default_8x8),
-		health(_health), currentTextReload(false), currentTextHealth(false), currentTextEntireScreen(false){
-		{
+		reloadDisplay(display, hwlib::location(0,0), hwlib::location(display.size.x, display.size.y/2)),
+		healthDisplay(display, hwlib::location(display.size.x, display.size.y/2 + 1), hwlib::location(display.size.x, display.size.y - 1)),
+		reloadOstream(reloadDisplay, hwlib::font_default_8x8()),
+		healthOstream(healthDisplay, hwlib::font_default_8x8()),
+		entireScreenOstream(display, hwlib::font_default_8x8()),
+		health(_health){
+			display.clear();
 		//if(health != -1)
 		// TODO initialize HealthBar
 		}
-
+		
+	void Clear(StringType ID);
 	void DisplayString(const char* s, StringType ID);
 	void DisplayString(int s, StringType ID);
-	void Clear(StringType ID);
 }; */
 

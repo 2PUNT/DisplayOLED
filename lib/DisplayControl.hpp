@@ -19,6 +19,8 @@ private:
 	hwlib::window_ostream entireScreenOstream; // Ostream to write characters to the Entire screen
 
 	int health; // variable to store the current health displayed.
+	
+	void ClearNoFlush(StringType ID);
 public:
 	DisplayControl(hwlib::window& _display, int _health = -1):
 		display(_display),
