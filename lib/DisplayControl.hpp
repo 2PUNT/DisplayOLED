@@ -16,7 +16,6 @@ private:
 	hwlib::window_part& healthDisplay; // the part of the Display that shows the health
 	hwlib::window_ostream& reloadOstream; // Ostream to write characters to the reloadScreen
 	hwlib::window_ostream& healthOstream; // Ostream to write characters to the reloadScreen
-	//hwlib::window_ostream& entireScreenOstream; // Ostream to write characters to the Entire screen
 
 	int health; // variable to store the current health displayed.
 public:
