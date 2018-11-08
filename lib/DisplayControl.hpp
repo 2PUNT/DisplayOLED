@@ -19,10 +19,12 @@ private:
 	//hwlib::window_ostream& entireScreenOstream; // Ostream to write characters to the Entire screen
 
 	int health; // variable to store the current health displayed.
-	
+
 	void ClearNoFlush(StringType ID);
 public:
-	DisplayControl(hwlib::window& _display, hwlib::window_part& reloadDisplay, hwlib::window_part& healthDisplay, hwlib::window_ostream& reloadOstream, hwlib::window_ostream& healthOstream, /* hwlib::window_ostream& entireScreenOstream, */ int _health = -1):
+	DisplayControl(hwlib::window& _display, hwlib::window_part& reloadDisplay, hwlib::window_part& healthDisplay, hwlib::window_ostream& reloadOstream, hwlib::window_ostream& healthOstream,
+		//hwlib::window_ostream& entireScreenOstream, 
+		int _health = -1):
 		display(_display),
 		reloadDisplay(reloadDisplay),
 		healthDisplay(healthDisplay),
@@ -34,7 +36,7 @@ public:
 		//if(health != -1)
 		// TODO initialize HealthBar
 		}
-		
+
 	void Clear(StringType ID);
 	void DisplayString(const char* s, StringType ID);
 	void DisplayString(int s, StringType ID);

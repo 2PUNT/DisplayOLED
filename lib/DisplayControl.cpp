@@ -19,7 +19,7 @@ void DisplayControl::ClearNoFlush(StringType ID){
 		case ENTIRE_SCREEN:{
 			//display.clear();
 			//entireScreenOstream.goto_xy(0,0);
-			//entireScreenOstream << '\f';
+			//entireScreenOstream << "\r" << "heelo" << hwlib::flush;
 			break;
 		}
 	}
@@ -36,57 +36,26 @@ void DisplayControl::Clear(StringType ID){
 			break;
 		}
 		case ENTIRE_SCREEN:{
-			//entireScreenOstream << '\f' << hwlib::flush;
+			//entireScreenOstream << '\n\f' << hwlib::flush;
 			break;
 		}
 	}
 }
 
 void DisplayControl::DisplayString(const char* s, StringType ID){
-	hwlib::cout << "clearing ostream\n";
 	ClearNoFlush(ID); // clear the Ostream, but do not flush yet.
-	hwlib::cout << "ostream cleared\n";
 	switch(ID){
 		case RELOAD:{
-			int index = 0;
-			char currentChar = s[index];
-			hwlib::cout << "writing characters: ";
-			while(currentChar != '\0'){
-				hwlib::cout << currentChar;
-				reloadOstream << currentChar;
-				index++;
-				currentChar = s[index];
-			}
-			hwlib::cout << "\nFlushing\n";
-			reloadOstream << "\fA less cool string!\n" << hwlib::flush;
-			hwlib::cout << "Flushed!\n";
+			reloadOstream << '\f'<< s << hwlib::flush;
 			break;
 		}
 		case HEALTH:{
-			//healthOstream << "\f"; // clear the Ostream, but do not flush yet.
-			
-			int index = 0;
-			char currentChar = s[index];
-			while(currentChar != '\0'){
-				healthOstream << currentChar;
-				index++;
-				currentChar = s[index];
-			}
-			healthOstream << hwlib::flush;
+			healthOstream << "\f" << s << hwlib::flush;
 			break;
 		}
 		case ENTIRE_SCREEN:{
-			/* //entireScreenOstream << '\f'; // clear the Ostream, but do not flush yet.
-			
-			int index = 0;
-			char currentChar = s[index];
-			while(currentChar != '\0'){
-				entireScreenOstream << currentChar;
-				index++;
-				currentChar = s[index];
-			}
-			entireScreenOstream << hwlib::flush;
-			break; */
+			//entireScreenOstream << '\f'<< s << hwlib::flush;
+			break;
 		}
 	}
 }
@@ -95,25 +64,22 @@ void DisplayControl::DisplayString(int s, StringType ID){
 	ClearNoFlush(ID);
 	switch(ID){
 		case RELOAD:{
-			//reloadOstream << '\f'; // clear the Ostream, but do not flush yet.
-			reloadOstream << s << hwlib::flush;
+			reloadOstream << '\f'<< s << hwlib::flush;
 			break;
 		}
 		case HEALTH:{
-			//healthOstream << '\f'; // clear the Ostream, but do not flush yet.
-			healthOstream << s << hwlib::flush;
+			healthOstream << "\f" << s << hwlib::flush;
 			break;
 		}
 		case ENTIRE_SCREEN:{
-			/* //entireScreenOstream << '\f'; // clear the Ostream, but do not flush yet.
-			entireScreenOstream << s << hwlib::flush; */
+			//entireScreenOstream << '\f'<< s << hwlib::flush;
 			break;
 		}
 	}
 }
 
 
-/* 
+/*
 enum StringType{
 	RELOAD,
 	HEALTH,
@@ -130,7 +96,7 @@ private:
 	hwlib::window_ostream entireScreenOstream; // Ostream to write characters to the Entire screen
 
 	int health; // variable to store the current health displayed.
-	
+
 	void ClearNoFlush();
 public:
 	DisplayControl(hwlib::window& _display, int _health = -1):
@@ -145,9 +111,8 @@ public:
 		//if(health != -1)
 		// TODO initialize HealthBar
 		}
-		
+
 	void Clear(StringType ID);
 	void DisplayString(const char* s, StringType ID);
 	void DisplayString(int s, StringType ID);
 }; */
-
