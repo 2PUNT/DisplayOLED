@@ -32,9 +32,25 @@ int main( void ){
 
 
         DisplayControl dp (oled,w1, w2, d1, d2, 100);
-        const char t[] = "est";
+        const char ReloadOne[] = "Not Reloading";
+		const char ReloadTwo[] = "Reloading!";
+		
+        //const char HealthOne[] = "Health: Positive";
+		//const char HealthTwo[] = "Health: Negative";
+		
+		hwlib::cout << "printing now\n";
 
-        dp.DisplayString(t, StringType::RELOAD);
+        dp.DisplayString(ReloadOne, StringType::RELOAD);
 
 
+		while(true){
+			hwlib::wait_ms(1000);
+			dp.DisplayString(ReloadTwo, StringType::RELOAD);
+			hwlib::wait_ms(1000);
+			dp.DisplayString(100, StringType::HEALTH);
+			hwlib::wait_ms(1000);
+			dp.DisplayString(ReloadOne, StringType::RELOAD);
+			hwlib::wait_ms(1000);
+			dp.DisplayString(0, StringType::HEALTH);
+		}
 }
