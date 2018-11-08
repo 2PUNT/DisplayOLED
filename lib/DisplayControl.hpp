@@ -12,23 +12,23 @@ enum StringType{
 class DisplayControl{
 private:
 	hwlib::window& display; // reference to the Display
-	hwlib::window_part reloadDisplay; // the part of the Display that shows whether the weapon is reloading
-	hwlib::window_part healthDisplay; // the part of the Display that shows the health
-	hwlib::window_ostream reloadOstream; // Ostream to write characters to the reloadScreen
-	hwlib::window_ostream healthOstream; // Ostream to write characters to the reloadScreen
-	hwlib::window_ostream entireScreenOstream; // Ostream to write characters to the Entire screen
+	hwlib::window_part& reloadDisplay; // the part of the Display that shows whether the weapon is reloading
+	hwlib::window_part& healthDisplay; // the part of the Display that shows the health
+	hwlib::window_ostream& reloadOstream; // Ostream to write characters to the reloadScreen
+	hwlib::window_ostream& healthOstream; // Ostream to write characters to the reloadScreen
+	//hwlib::window_ostream& entireScreenOstream; // Ostream to write characters to the Entire screen
 
 	int health; // variable to store the current health displayed.
 	
 	void ClearNoFlush(StringType ID);
 public:
-	DisplayControl(hwlib::window& _display, int _health = -1):
+	DisplayControl(hwlib::window& _display, hwlib::window_part& reloadDisplay, hwlib::window_part& healthDisplay, hwlib::window_ostream& reloadOstream, hwlib::window_ostream& healthOstream, /* hwlib::window_ostream& entireScreenOstream, */ int _health = -1):
 		display(_display),
-		reloadDisplay(display, hwlib::location(0,0), hwlib::location(display.size.x, display.size.y/2)),
-		healthDisplay(display, hwlib::location(display.size.x, display.size.y/2 + 1), hwlib::location(display.size.x, display.size.y - 1)),
-		reloadOstream(reloadDisplay, hwlib::font_default_8x8()),
-		healthOstream(healthDisplay, hwlib::font_default_8x8()),
-		entireScreenOstream(display, hwlib::font_default_8x8()),
+		reloadDisplay(reloadDisplay),
+		healthDisplay(healthDisplay),
+		reloadOstream(reloadOstream),
+		healthOstream(healthOstream),
+		//entireScreenOstream(entireScreenOstream),
 		health(_health){
 			display.clear();
 		//if(health != -1)
