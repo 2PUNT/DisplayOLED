@@ -4,8 +4,8 @@
 #include "hwlib.hpp"
 
 enum StringType{
-	RELOAD,
-	HEALTH,
+	RELOAD,	// upper part
+	HEALTH, // lower part
 	ENTIRE_SCREEN
 };
 
