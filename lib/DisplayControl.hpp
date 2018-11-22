@@ -3,12 +3,19 @@
 
 #include "hwlib.hpp"
 
+/// @brief
+/// StringTypes for DisplayControl. 
+/// @details
+/// This is an enum used in DisplayString() to define what the string represents
+/// so DisplayControl can place it correctly.
 enum StringType{
 	RELOAD,	// upper part
 	HEALTH, // lower part
 	ENTIRE_SCREEN
 };
 
+///@class DisplayControl
+///@brief Control object that manages the display.
 class DisplayControl{
 private:
 	hwlib::window& display; // reference to the Display
@@ -33,20 +40,20 @@ public:
 
 	///@fn void DisplayControl::clear(const char* s, StringType ID)
 	///@brief Clears a screen by id
-	///@param ID The screen which should be overriden
+	///@param ID Specifies what data should be cleared.
 	void Clear(StringType ID);
 
 
 	///@fn void DisplayControl::DisplayString(const char* s, StringType ID)
 	///@brief Sets a char string on screen
 	///@param s The string to put on screen.
-	///@param ID The screen which should be overriden
+	///@param ID The data that should be overridden
 	void DisplayString(const char* s, StringType ID);
 
 	///@fn void DisplayControl::DisplayString(int s, StringType ID)
 	///@brief Sets an int on screen
 	///@param s The int to put on screen.
-	///@param ID The screen which should be overriden
+	///@param ID The data that should be overridden
 	void DisplayString(int s, StringType ID);
 };
 
